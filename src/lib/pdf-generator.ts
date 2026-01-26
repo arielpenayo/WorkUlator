@@ -12,8 +12,8 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   
   // Set document properties
   doc.setProperties({
-    title: 'WorkUlator - Project Quote',
-    subject: 'Software Project Cost Estimation',
+    title: 'WorkUlator - Cotización de Proyecto',
+    subject: 'Estimación de Costos de Proyecto de Software',
     author: 'WorkUlator',
     creator: 'WorkUlator App'
   })
@@ -27,43 +27,41 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   
   yPosition += 10
   doc.setFontSize(16)
-  doc.text('Project Cost Estimation', 105, yPosition, { align: 'center' })
+  doc.text('Estimación de Costos del Proyecto', 105, yPosition, { align: 'center' })
   
   yPosition += 15
   doc.setFontSize(10)
   doc.setFont('helvetica', 'normal')
-  doc.text(`Date: ${new Date().toLocaleDateString()}`, 105, yPosition, { align: 'center' })
+  doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 105, yPosition, { align: 'center' })
 
   // Configuration section
   yPosition += 15
   doc.setFontSize(14)
   doc.setFont('helvetica', 'bold')
-  doc.text('Configuration', 20, yPosition)
+  doc.text('Configuración', 20, yPosition)
   
   yPosition += 8
   doc.setFontSize(10)
   doc.setFont('helvetica', 'normal')
-  doc.text(`Hourly Rate: ${formatUSD(config.hourlyRate)}`, 20, yPosition)
+  doc.text(`Tarifa por hora: ${formatUSD(config.hourlyRate)}`, 20, yPosition)
   
   yPosition += 6
-  doc.text(`Exchange Rate: ${formatGuaranies(config.exchangeRate)} per USD`, 20, yPosition)
+  doc.text(`Tipo de cambio: ${formatGuaranies(config.exchangeRate)} por USD`, 20, yPosition)
   
-  yPosition += 6
-  doc.text(`Profit Margin: ${config.profitMargin}%`, 20, yPosition)
 
   // Phases section
   yPosition += 15
   doc.setFontSize(14)
   doc.setFont('helvetica', 'bold')
-  doc.text('Project Phases', 20, yPosition)
+  doc.text('Fases del Proyecto', 20, yPosition)
 
   yPosition += 10
   doc.setFontSize(10)
   doc.setFont('helvetica', 'bold')
-  doc.text('Phase', 20, yPosition)
-  doc.text('Hours', 100, yPosition)
-  doc.text('Cost (USD)', 130, yPosition)
-  doc.text('Cost (Gs)', 170, yPosition)
+  doc.text('Fase', 20, yPosition)
+  doc.text('Horas', 100, yPosition)
+  doc.text('Costo (USD)', 130, yPosition)
+  doc.text('Costo (Gs)', 170, yPosition)
 
   yPosition += 2
   doc.line(20, yPosition, 200, yPosition)
@@ -90,7 +88,7 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   yPosition += 8
 
   doc.setFont('helvetica', 'bold')
-  doc.text('Total Hours:', 20, yPosition)
+  doc.text('Horas totales:', 20, yPosition)
   doc.setFont('helvetica', 'normal')
   doc.text(results.totalHours.toString(), 100, yPosition)
 
@@ -100,13 +98,6 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   doc.setFont('helvetica', 'normal')
   doc.text(formatUSD(results.subtotalUSD), 130, yPosition)
   doc.text(formatGuaranies(results.subtotalGuaranies), 170, yPosition)
-
-  yPosition += 6
-  doc.setFont('helvetica', 'bold')
-  doc.text(`Profit (${config.profitMargin}%):`, 20, yPosition)
-  doc.setFont('helvetica', 'normal')
-  doc.text(formatUSD(results.profitUSD), 130, yPosition)
-  doc.text(formatGuaranies(results.profitGuaranies), 170, yPosition)
 
   yPosition += 2
   doc.line(20, yPosition, 200, yPosition)
@@ -119,6 +110,6 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   doc.text(formatGuaranies(results.totalGuaranies), 170, yPosition)
 
   // Save the PDF
-  const fileName = `workulator-quote-${new Date().toISOString().split('T')[0]}.pdf`
+  const fileName = `workulator-cotizacion-${new Date().toISOString().split('T')[0]}.pdf`
   doc.save(fileName)
 }
