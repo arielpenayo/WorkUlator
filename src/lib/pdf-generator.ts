@@ -10,11 +10,13 @@ import { formatUSD, formatGuaranies } from '@/lib/utils'
 export function generatePDF(results: CalculationResults, config: CalculatorConfig): void {
   const doc = new jsPDF()
   
+  const projectName = config.projectName || 'WorkUlator'
+  
   // Set document properties
   doc.setProperties({
-    title: 'WorkUlator - Cotización de Proyecto',
+    title: `${projectName} - Cotización de Proyecto`,
     subject: 'Estimación de Costos de Proyecto de Software',
-    author: 'WorkUlator',
+    author: projectName,
     creator: 'WorkUlator App'
   })
 
@@ -23,7 +25,7 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   // Header
   doc.setFontSize(22)
   doc.setFont('helvetica', 'bold')
-  doc.text('WorkUlator', 105, yPosition, { align: 'center' })
+  doc.text(projectName, 105, yPosition, { align: 'center' })
   
   yPosition += 10
   doc.setFontSize(16)
@@ -110,6 +112,7 @@ export function generatePDF(results: CalculationResults, config: CalculatorConfi
   doc.text(formatGuaranies(results.totalGuaranies), 170, yPosition)
 
   // Save the PDF
-  const fileName = `workulator-cotizacion-${new Date().toISOString().split('T')[0]}.pdf`
+  const sanitizedProjectName = projectName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  const fileName = `${sanitizedProjectName}-cotizacion-${new Date().toISOString().split('T')[0]}.pdf`
   doc.save(fileName)
 }

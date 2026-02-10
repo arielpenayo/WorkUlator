@@ -11,6 +11,7 @@ export interface Phase {
  * Configuration settings for the calculator
  */
 export interface CalculatorConfig {
+  projectName: string
   hourlyRate: number
   exchangeRate: number
   profitMargin: number

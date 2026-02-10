@@ -51,6 +51,21 @@ export function InputsSection({ config, phases, onConfigChange, onPhasesChange }
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Configuration Inputs */}
+        <div className="space-y-2">
+          <label htmlFor="projectName" className="text-sm font-medium">
+            Project Name
+          </label>
+          <Input
+            id="projectName"
+            type="text"
+            placeholder="Enter project name"
+            value={config.projectName}
+            onChange={(e) =>
+              onConfigChange({ ...config, projectName: e.target.value })
+            }
+          />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <label htmlFor="hourlyRate" className="text-sm font-medium">

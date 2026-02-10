@@ -11,6 +11,7 @@ const STORAGE_KEY = 'workulator-config'
 
 // Default configuration
 const defaultConfig: CalculatorConfig = {
+  projectName: 'My Project',
   hourlyRate: 17,
   exchangeRate: 7010,
   profitMargin: 15,
